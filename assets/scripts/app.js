@@ -11,7 +11,7 @@ const LOG_EVENT_MONSTER_ATTACK = 'MONSTER_ATTACK';
 const LOG_EVENT_PLAYER_HEAL = 'PLAYER_HEAL';
 const LOG_EVENT_GAME_OVER = 'GAME_OVER';
 
-const enteredVale = prompt('Maximum life for and the monster.', '100');
+const enteredVale = prompt('Maximum life for you and the monster.', '100');
 
 let chosenMaxLife = parseInt(enteredVale);
 let battleLog = [];
@@ -41,7 +41,7 @@ function writeToLog(event, value, monsterHealth, playerHealth) {
             break;
         case LOG_EVENT_MONSTER_ATTACK:
         case LOG_EVENT_PLAYER_HEAL:
-            logEntrylogEntry.target = 'PLAYER';
+            logEntry.target = 'PLAYER';
             break;
         default:
             logEntry = {};
@@ -164,15 +164,20 @@ function healHandler(){
 }
 
 function printLogHandler(){
-    for (let i = 0; i < 3; i++) {
-        console.log("----------");
-    }
+    let j = 0;
+    do {
+        console.log('----------');
+        j++;
+    } while(j < 3);
 
+    let i = 0;
     for (const logEntry of battleLog) {
-        console.log(logEntry);
+        console.log(`#${i}`);
+        for (const key in logEntry) {
+            console.log(`${key} => ${logEntry[key]}`);
+        }
+        i++;
     }
-
-    console.log(battleLog);
 }
 
 attackBtn.addEventListener('click', attackHandler);
